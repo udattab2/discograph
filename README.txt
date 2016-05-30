@@ -2,9 +2,7 @@
 
                    Created by-
 
-Udatta Bhattacharya - 44
-Vipul Prakash       - 47 
-Palak Agarwal       - 29
+Udatta Bhattacharya (udattab2@gmail.com)
 
 ----------------------------------------------------
 
