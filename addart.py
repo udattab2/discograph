@@ -1,5 +1,6 @@
 import json
-import urllib
+import urllib.parse
+import urllib.request
 import sqlite3
 import setcount
 import os
@@ -7,8 +8,8 @@ import os
 def update(artname,cur):
 	
 	url='http://api.musicgraph.com/api/v2/artist/search?'
-	url1=url+urllib.urlencode({'api_key':'5047c0ecb7625ed2dd03f1c35845d35a','name':artname})
-	data0=urllib.urlopen(url1).read()
+	url1=url+urllib.parse.urlencode({'api_key':'5047c0ecb7625ed2dd03f1c35845d35a','name':artname})
+	data0=urllib.request.urlopen(url1).read()
 	js0=json.loads(data0)
 	genre=js0['data'][0]['main_genre']
 	cur.execute('''select name from genre''')
