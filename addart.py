@@ -61,14 +61,14 @@ def update(artname,cur):
 					except:						
 						continue
 					os.system('cls')
-					print 'Adding Artist: ',artname
-					print '\n\n=====Updating Database====='
+					print('Adding Artist: ',artname)
+					print('\n\n=====Updating Database=====')
 					count=count+1
 					perc=(float(count)/float(sum))*100.00
-					print '\n\n Downloading...  ', perc, '%'	
+					print('\n\n Downloading...  ', perc, '%')	
 		except:
 			continue
 	os.system('cls')
-	print artname, ' Added!'			
+	print(artname, ' Added!')			
 	setcount.albcounter(cur)
 	setcount.songcounter(cur)

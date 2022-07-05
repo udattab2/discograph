@@ -7,24 +7,24 @@ def art_browse(ch0, flag, cur, conn):
 	while True:
 		os.system('cls')
 		if flag==1: break
-		print '===================ARTISTS===================== \n\n'
-		print 'Artists: \n\n'
+		print('===================ARTISTS===================== \n\n')
+		print('Artists: \n\n')
 		cur.execute('''select id, name from artist''')
 		nm1=cur.fetchall()
 		for artname in nm1:
-			print artname[0],'->', artname[1],'\n\n'
-		print '\n\na-> Add Artist\n\n'	
-		print 'b-> Back\n\n'
-		print 'm-> Main\n\n' 
-		ch1= raw_input('Enter Choice: ')
+			print(artname[0],'->', artname[1],'\n\n')
+		print('\n\na-> Add Artist\n\n')	
+		print('b-> Back\n\n')
+		print('m-> Main\n\n') 
+		ch1= input('Enter Choice: ')
 		if ch1=='a':
 			os.system('cls')
-			add1=raw_input('Enter Artist Name: ')
+			add1=input('Enter Artist Name: ')
 			addart.update(add1,cur)
 			conn.commit()
-			print '\nb-> Back\n\n'
-			print 'm-> Main\n\n'
-			add2= raw_input('Enter Choice: ')
+			print('\nb-> Back\n\n')
+			print('m-> Main\n\n')
+			add2= input('Enter Choice: ')
 			if add2=='b':
 				break
 			elif add2=='m':

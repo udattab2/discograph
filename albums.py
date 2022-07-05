@@ -6,8 +6,8 @@ def alb_browse(ch0, nm2, ch1, flag, cur):
 	while True:
 		os.system('cls')
 		if flag==1: break
-		print '===============',nm2[0],'===============\n\n'
-		print 'Albums: \n\n'
+		print('===============',nm2[0],'===============\n\n')
+		print('Albums: \n\n')
 		
 		if ch0=='1':
 			cur.execute('''select album_no, name from album where artist_id=? order by album_no''',(ch1, ))
@@ -17,14 +17,14 @@ def alb_browse(ch0, nm2, ch1, flag, cur):
 		for albname in nm3:
 			try:
 				if ch0=='1':
-					print albname[0],'->',albname[1],'\n\n'
+					print(albname[0],'->',albname[1],'\n\n')
 				elif ch0=='2':
-					print albname[1],'->',albname[0],'\n\n'	
+					print(albname[1],'->',albname[0],'\n\n')	
 			except:
 				continue		
-		print '\n\nb-> Back\n\n'
-		print 'm-> Main\n\n'	
-		ch2= raw_input('Enter Choice: ')
+		print('\n\nb-> Back\n\n')
+		print('m-> Main\n\n')	
+		ch2= input('Enter Choice: ')
 		if ch2=='b':
 			break	
 		elif ch2=='m':

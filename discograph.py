@@ -12,13 +12,13 @@ cur=conn.cursor()
 while True:
 	flag=0
 	os.system('cls')
-	print '===============DISCOGRAPH=============== \n\n'
-	print 'Explore By: \n\n'
-	print '1-> Artists \n\n'
-	print '2-> Genre \n\n'
-	print '\n\ns-> Search \n\n'
-	print '\n\ne-> Exit\n\n'
-	ch0=raw_input('Enter Choice: ')
+	print('===============DISCOGRAPH=============== \n\n')
+	print('Explore By: \n\n')
+	print('1-> Artists \n\n')
+	print('2-> Genre \n\n')
+	print('\n\ns-> Search \n\n')
+	print('\n\ne-> Exit\n\n')
+	ch0=input('Enter Choice: ')
 	if ch0=='e': 
 		os.system('cls')
 		break
