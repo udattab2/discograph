@@ -1,6 +1,6 @@
 import sqlite3
 import os
-import tracks
+import utils.tracks as tracks
 
 def alb_browse(ch0, nm2, ch1, flag, cur):
 	while True:
