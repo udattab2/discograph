@@ -2,7 +2,7 @@ import json
 import urllib.parse
 import urllib.request
 import sqlite3
-import setcount
+import utils.setcount as setcount
 import os
 
 def update(artname,cur):

@@ -1,9 +1,8 @@
 import sqlite3
-import os
-import addart
-import artists
-import srch
-import genres
+import utils.artists as artists
+import utils.srch as srch
+import utils.genres as genres
+from utils.helper import clear_screen
 
 conn=sqlite3.connect('test2.db')
 cur=conn.cursor()
@@ -11,7 +10,7 @@ cur=conn.cursor()
 
 while True:
 	flag=0
-	os.system('cls')
+	clear_screen()
 	print('===============DISCOGRAPH=============== \n\n')
 	print('Explore By: \n\n')
 	print('1-> Artists \n\n')
@@ -20,7 +19,7 @@ while True:
 	print('\n\ne-> Exit\n\n')
 	ch0=input('Enter Choice: ')
 	if ch0=='e': 
-		os.system('cls')
+		clear_screen()
 		break
 	elif ch0=='s':
 		srch.src(flag, cur)

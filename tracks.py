@@ -1,10 +1,11 @@
 import sqlite3
 import os
-import lyrics
+import utils.lyrics as lyrics
+from utils.helper import clear_screen
 
 def track_browse(nm4, flag, cur):		
 	while True:
-		os.system('cls')
+		clear_screen()
 		if flag==1: break
 		print('===============',nm4[0],'===============\n\n')
 		print('Year of Release: ', nm4[2],'\n\n')
@@ -29,7 +30,7 @@ def track_browse(nm4, flag, cur):
 	
 def track_src(trackres, flag, cur):
 	while True:
-		os.system('cls')
+		clear_screen()
 		if flag==1: break
 		print('===============SEARCH RESULTS===============\n\n')
 		for trackname in trackres:

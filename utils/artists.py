@@ -1,11 +1,12 @@
 import sqlite3
 import os
-import addart
-import albums
+import utils.addart as addart
+import utils.albums as albums
+from utils.helper import clear_screen
 
-def art_browse(ch0, flag, cur, conn):		
+def art_browse(ch0, flag, cur, conn):			
 	while True:
-		os.system('cls')
+		clear_screen()
 		if flag==1: break
 		print('===================ARTISTS===================== \n\n')
 		print('Artists: \n\n')
@@ -18,7 +19,7 @@ def art_browse(ch0, flag, cur, conn):
 		print('m-> Main\n\n') 
 		ch1= input('Enter Choice: ')
 		if ch1=='a':
-			os.system('cls')
+			clear_screen()
 			add1=input('Enter Artist Name: ')
 			addart.update(add1,cur)
 			conn.commit()

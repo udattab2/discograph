@@ -1,6 +1,6 @@
 import sqlite3
 import os
-import albums
+import utils.albums as albums
 
 def gen_browse(ch0, flag, cur):		
 	while True:
