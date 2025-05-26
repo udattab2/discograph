@@ -1,9 +1,8 @@
-import sqlite3
+from utils.helper import clear_screen
 import utils.tracks as tracks
-import os
 
 def src(flag, cur):
-	os.system('cls')
+	clear_screen()
 	print('===============SEARCH===============\n\n')
 	srchstr=input('Search For: ')
 	cur.execute('''select * from track where name=?''',(srchstr, ))

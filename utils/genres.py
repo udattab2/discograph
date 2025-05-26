@@ -1,10 +1,9 @@
-import sqlite3
-import os
 import utils.albums as albums
+from utils.helper import clear_screen
 
 def gen_browse(ch0, flag, cur):		
 	while True:
-		os.system('cls')
+		clear_screen()
 		if flag==1: break
 		print('===============GENRES===============\n\n')
 		cur.execute('''select * from genre''')

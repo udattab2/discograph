@@ -1,10 +1,11 @@
 import sqlite3
 import os
+from utils.helper import clear_screen
 import utils.tracks as tracks
 
 def alb_browse(ch0, nm2, ch1, flag, cur):
 	while True:
-		os.system('cls')
+		clear_screen()
 		if flag==1: break
 		print('===============',nm2[0],'===============\n\n')
 		print('Albums: \n\n')
@@ -34,7 +35,6 @@ def alb_browse(ch0, nm2, ch1, flag, cur):
 				cur.execute('''select name, trackcount, year, id from album where artist_id=? and album_no=?''',(ch1, ch2, ))
 			elif ch0=='2':
 				cur.execute('''select name, trackcount, year, id from album where id=?''', (ch2, ))
-			nm4= cur.fetchone()
-		
+		nm4= cur.fetchone()
 		flag=tracks.track_browse(nm4, flag, cur)
 	return flag

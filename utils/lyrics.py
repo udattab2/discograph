@@ -1,9 +1,9 @@
-import sqlite3
-import os
+from utils.helper import clear_screen
+
 
 def lyr_show(nm6, flag, cur):
 	while True:
-		os.system('cls')
+		clear_screen()
 		if flag==1: break
 		print('===============',nm6[0],'===============\n\n')
 		cur.execute('''select name from genre where id=?''',(nm6[3], ))
