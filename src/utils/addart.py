@@ -92,9 +92,9 @@ def update(artname, cur):
 	3. Inserts the artist into the database.
 	4. Fetches all albums for the artist.
 	5. For each album:
-		a. Inserts the album into the database.
-		b. Fetches all tracks for the album.
-		c. Inserts each track into the database, updating progress on the screen.
+	a. Inserts the album into the database.
+	b. Fetches all tracks for the album.
+	c. Inserts each track into the database, updating progress on the screen.
 	6. After processing all albums and tracks, prints a completion message.
 	7. Updates album and song counters in the database.
 	Args:

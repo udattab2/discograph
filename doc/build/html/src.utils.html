@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>src.utils package &#8212; discograph 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=8d563738"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="src package" href="src.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="src-utils-package">
+<h1>src.utils package<a class="headerlink" href="#src-utils-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-src.utils.addart">
+<span id="src-utils-addart-module"></span><h2>src.utils.addart module<a class="headerlink" href="#module-src.utils.addart" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.addart.ensure_genre_in_db">
+<span class="sig-prename descclassname"><span class="pre">src.utils.addart.</span></span><span class="sig-name descname"><span class="pre">ensure_genre_in_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cur</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">genre</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.addart.ensure_genre_in_db" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.addart.fetch_album_tracks">
+<span class="sig-prename descclassname"><span class="pre">src.utils.addart.</span></span><span class="sig-name descname"><span class="pre">fetch_album_tracks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">album_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.addart.fetch_album_tracks" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.addart.fetch_albums">
+<span class="sig-prename descclassname"><span class="pre">src.utils.addart.</span></span><span class="sig-name descname"><span class="pre">fetch_albums</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">artname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.addart.fetch_albums" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.addart.fetch_artist_genre">
+<span class="sig-prename descclassname"><span class="pre">src.utils.addart.</span></span><span class="sig-name descname"><span class="pre">fetch_artist_genre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">artname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.addart.fetch_artist_genre" title="Link to this definition">¶</a></dt>
+<dd><p>Fetches the main genre of an artist using the MusicGraph API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>artname</strong> (<em>str</em>) – The name of the artist to search for.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The main genre of the artist if found, otherwise None.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str or None</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>URLError</strong> – If there is a problem with the network request.</p></li>
+<li><p><strong>JSONDecodeError</strong> – If the response cannot be decoded as JSON.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Requires the global variables MUSICGRAPH_BASE and API_KEY to be defined.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.addart.fetch_lyrics">
+<span class="sig-prename descclassname"><span class="pre">src.utils.addart.</span></span><span class="sig-name descname"><span class="pre">fetch_lyrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">artname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_title</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.addart.fetch_lyrics" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.addart.insert_album">
+<span class="sig-prename descclassname"><span class="pre">src.utils.addart.</span></span><span class="sig-name descname"><span class="pre">insert_album</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cur</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">album</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">artid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.addart.insert_album" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.addart.insert_artist">
+<span class="sig-prename descclassname"><span class="pre">src.utils.addart.</span></span><span class="sig-name descname"><span class="pre">insert_artist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cur</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">artname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.addart.insert_artist" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.addart.insert_track">
+<span class="sig-prename descclassname"><span class="pre">src.utils.addart.</span></span><span class="sig-name descname"><span class="pre">insert_track</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cur</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">album_title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">genre</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">artname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.addart.insert_track" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.addart.update">
+<span class="sig-prename descclassname"><span class="pre">src.utils.addart.</span></span><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">artname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cur</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.addart.update" title="Link to this definition">¶</a></dt>
+<dd><p>Updates the database with information about the given artist.
+This function performs the following steps:
+1. Fetches the genre for the specified artist. If not found, prints a message and returns.
+2. Ensures the genre exists in the database.
+3. Inserts the artist into the database.
+4. Fetches all albums for the artist.
+5. For each album:
+a. Inserts the album into the database.
+b. Fetches all tracks for the album.
+c. Inserts each track into the database, updating progress on the screen.
+6. After processing all albums and tracks, prints a completion message.
+7. Updates album and song counters in the database.
+:param artname: The name of the artist to update in the database.
+:type artname: str
+:param cur: The database cursor used for executing SQL commands.
+:type cur: sqlite3.Cursor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.utils.albums">
+<span id="src-utils-albums-module"></span><h2>src.utils.albums module<a class="headerlink" href="#module-src.utils.albums" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.albums.alb_browse">
+<span class="sig-prename descclassname"><span class="pre">src.utils.albums.</span></span><span class="sig-name descname"><span class="pre">alb_browse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ch0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nm2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ch1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cur</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.albums.alb_browse" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-src.utils.artists">
+<span id="src-utils-artists-module"></span><h2>src.utils.artists module<a class="headerlink" href="#module-src.utils.artists" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.artists.art_browse">
+<span class="sig-prename descclassname"><span class="pre">src.utils.artists.</span></span><span class="sig-name descname"><span class="pre">art_browse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ch0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cur</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conn</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.artists.art_browse" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-src.utils.genres">
+<span id="src-utils-genres-module"></span><h2>src.utils.genres module<a class="headerlink" href="#module-src.utils.genres" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.genres.gen_browse">
+<span class="sig-prename descclassname"><span class="pre">src.utils.genres.</span></span><span class="sig-name descname"><span class="pre">gen_browse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ch0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cur</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.genres.gen_browse" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-src.utils.helper">
+<span id="src-utils-helper-module"></span><h2>src.utils.helper module<a class="headerlink" href="#module-src.utils.helper" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.helper.clear_screen">
+<span class="sig-prename descclassname"><span class="pre">src.utils.helper.</span></span><span class="sig-name descname"><span class="pre">clear_screen</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.helper.clear_screen" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-src.utils.lyrics">
+<span id="src-utils-lyrics-module"></span><h2>src.utils.lyrics module<a class="headerlink" href="#module-src.utils.lyrics" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.lyrics.lyr_show">
+<span class="sig-prename descclassname"><span class="pre">src.utils.lyrics.</span></span><span class="sig-name descname"><span class="pre">lyr_show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nm6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cur</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.lyrics.lyr_show" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-src.utils.setcount">
+<span id="src-utils-setcount-module"></span><h2>src.utils.setcount module<a class="headerlink" href="#module-src.utils.setcount" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.setcount.albcounter">
+<span class="sig-prename descclassname"><span class="pre">src.utils.setcount.</span></span><span class="sig-name descname"><span class="pre">albcounter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cur</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.setcount.albcounter" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.setcount.songcounter">
+<span class="sig-prename descclassname"><span class="pre">src.utils.setcount.</span></span><span class="sig-name descname"><span class="pre">songcounter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cur</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.setcount.songcounter" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-src.utils.srch">
+<span id="src-utils-srch-module"></span><h2>src.utils.srch module<a class="headerlink" href="#module-src.utils.srch" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.srch.src">
+<span class="sig-prename descclassname"><span class="pre">src.utils.srch.</span></span><span class="sig-name descname"><span class="pre">src</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cur</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.srch.src" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-src.utils.tracks">
+<span id="src-utils-tracks-module"></span><h2>src.utils.tracks module<a class="headerlink" href="#module-src.utils.tracks" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.tracks.track_browse">
+<span class="sig-prename descclassname"><span class="pre">src.utils.tracks.</span></span><span class="sig-name descname"><span class="pre">track_browse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nm4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cur</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.tracks.track_browse" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.tracks.track_src">
+<span class="sig-prename descclassname"><span class="pre">src.utils.tracks.</span></span><span class="sig-name descname"><span class="pre">track_src</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trackres</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cur</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.tracks.track_src" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-src.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.utils" title="Link to this heading">¶</a></h2>
+<p>This package serves as the root package for the project.</p>
+<p>The __init__.py file marks this directory as a Python package and allows for
+package-level imports and initialization. Currently, it does not perform any
+initialization or expose any modules or attributes.</p>
+<p>Add any package-level imports or initialization code here as needed.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">discograph</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="src.html">src package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">src</a><ul>
+  <li><a href="src.html">src package</a><ul>
+      <li>Previous: <a href="src.html" title="previous chapter">src package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Udatta Bhattacharya.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/src.utils.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
