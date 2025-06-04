@@ -19,6 +19,10 @@ Users can choose to browse by artist or genre, after which the tool presents rel
 
 Additional information is provided for albums and tracks. For albums, the tool displays the year of release and track count. For individual tracks, it shows the length or duration.
 
+## Package Documentation
+
+[Go to Discograph Package Documentation](/docs/build/html/index.html)
+
 ## Concept
 
 Discography is the study and cataloging of published sound recordings, often by specific artists or within particular musical genres. The exact information included varies depending on the type and scope of the discography, but a typical entry will often list details such as the names of the artists involved, the time and place of the recording, the title of the piece performed, and release dates. Using this tool, users can extract such information, which is stored in the database as various relations containing artists, genres, albums, and tracks.
