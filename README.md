@@ -21,7 +21,7 @@ Additional information is provided for albums and tracks. For albums, the tool d
 
 ## Package Documentation
 
- [Go to Discograph Package Documentation](/docs/build/html/index.html)
+[Go to Discograph Package Documentation](/docs/html/index.html)
 
 ## Concept
 
