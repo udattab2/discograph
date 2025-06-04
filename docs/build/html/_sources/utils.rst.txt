@@ -1,0 +1,85 @@
+utils package
+=============
+
+Submodules
+----------
+
+utils.addart module
+-------------------
+
+.. automodule:: utils.addart
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+utils.albums module
+-------------------
+
+.. automodule:: utils.albums
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+utils.artists module
+--------------------
+
+.. automodule:: utils.artists
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+utils.genres module
+-------------------
+
+.. automodule:: utils.genres
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+utils.helper module
+-------------------
+
+.. automodule:: utils.helper
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+utils.lyrics module
+-------------------
+
+.. automodule:: utils.lyrics
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+utils.setcount module
+---------------------
+
+.. automodule:: utils.setcount
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+utils.srch module
+-----------------
+
+.. automodule:: utils.srch
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+utils.tracks module
+-------------------
+
+.. automodule:: utils.tracks
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: utils
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -1,0 +1,7 @@
+discograph module
+=================
+
+.. automodule:: discograph
+   :members:
+   :show-inheritance:
+   :undoc-members:
