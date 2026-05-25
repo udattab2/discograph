@@ -2,9 +2,10 @@ import json
 import urllib.parse
 import urllib.request
 import sqlite3
-from utils.helper import clear_screen
+from utils.helper import clear_screen, console
 import utils.setcount as setcount
 import os
+from rich.progress import Progress, BarColumn, TextColumn, TimeRemainingColumn
 
 API_KEY = '5047c0ecb7625ed2dd03f1c35845d35a'
 MUSICGRAPH_BASE = 'http://api.musicgraph.com/api/v2'
@@ -83,7 +84,7 @@ def insert_track(cur, track, album_title, genre, artname):
 		(track['title'], lyrics, albid[0], time, genid[0])
 	)
 
-def update(artname, cur):
+def update(artname: str, cur: sqlite3.Cursor) -> None:
 	"""
 	Updates the database with information about the given artist.
 	This function performs the following steps:
@@ -105,7 +106,7 @@ def update(artname, cur):
 	"""
 	genre = fetch_artist_genre(artname)
 	if not genre:
-		print(f"Genre not found for artist: {artname}")
+		console.print(f"[bold red]Error:[/bold red] Genre not found for artist: {artname}")
 		return
 	
 	ensure_genre_in_db(cur, genre)
@@ -114,28 +115,30 @@ def update(artname, cur):
 	
 	albums = fetch_albums(artname)
 	total_tracks = sum(int(a.get('number_of_tracks', 0)) for a in albums)
-	count = 0
 
-	for album in albums:
-		try:
-			cur.execute('SELECT id FROM artist WHERE name=?', (artname,))
-			artid = cur.fetchone()[0]
-			insert_album(cur, album, artid)
-			tracks = fetch_album_tracks(album['id'])
-			for track in tracks:
-				try:
-					insert_track(cur, track, album['title'], genre, artname)
-				except Exception:
-					continue
-				clear_screen()
-				print('Adding Artist: ', artname)
-				print('\n\n=====Updating Database=====')
-				count += 1
-				perc = (float(count) / float(total_tracks)) * 100.00 if total_tracks else 100
-				print('\n\n Downloading...  ', perc, '%')
-		except Exception:
-			continue
-	clear_screen()
-	print(artname, ' Added!')
+	with Progress(
+		TextColumn("[bold blue]{task.description}"),
+		BarColumn(),
+		TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
+		TimeRemainingColumn(),
+		console=console
+	) as progress:
+		task = progress.add_task(f"Downloading discography for {artname}...", total=total_tracks)
+
+		for album in albums:
+			try:
+				cur.execute('SELECT id FROM artist WHERE name=?', (artname,))
+				artid = cur.fetchone()[0]
+				insert_album(cur, album, artid)
+				tracks = fetch_album_tracks(album['id'])
+				for track in tracks:
+					try:
+						insert_track(cur, track, album['title'], genre, artname)
+					except Exception:
+						pass
+					progress.update(task, advance=1)
+			except Exception:
+				continue
+				
 	setcount.albcounter(cur)
 	setcount.songcounter(cur)

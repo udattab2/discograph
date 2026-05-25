@@ -1,49 +1,135 @@
 import sqlite3
-import os
+from utils.helper import clear_screen, console
+from utils.models import Track
 import utils.lyrics as lyrics
-from utils.helper import clear_screen
+from rich.panel import Panel
+import questionary
 
-def track_browse(nm4, flag, cur):		
-	while True:
-		clear_screen()
-		if flag==1: break
-		print('===============',nm4[0],'===============\n\n')
-		print('Year of Release: ', nm4[2],'\n\n')
-		print('No. of Tracks: ',nm4[1],'\n\n')
-		print('Tracklist: \n\n')
-		cur.execute('''select song_no, name from track where album_id=?''',(nm4[3], ))
-		nm5=cur.fetchall()
-		for trackname in nm5:
-			print(trackname[0],'->',trackname[1],'\n\n')
-		print('\n\nb-> Back\n\n')
-		print('m-> Main\n\n')
-		ch3= input('Enter Choice: ')
-		if ch3=='b':
-			break
-		elif ch3=='m':
-			flag=1	
-		else:	
-			cur.execute('''select name, length, album_id, genre_id, lyrics from track where album_id=? and song_no=?''',(nm4[3],ch3, ))
-			nm6=cur.fetchone()
-		flag=lyrics.lyr_show(nm6, flag, cur)
-	return flag
+def track_browse(nm4: sqlite3.Row, flag: int, cur: sqlite3.Cursor) -> int:		
+    while True:
+        clear_screen()
+        if flag == 1:
+            break
+
+        album_name = nm4[0]
+        track_count = nm4[1]
+        release_year = nm4[2]
+        album_id = nm4[3]
+
+        info_text = f"[bold cyan]{album_name.upper()}[/bold cyan]\n"
+        details = []
+        if release_year:
+            details.append(f"[dim]Year of Release:[/dim] {release_year}")
+        if track_count:
+            details.append(f"[dim]No. of Tracks:[/dim] {track_count}")
+        info_text += " | ".join(details)
+
+        console.print(Panel.fit(info_text, border_style="cyan"))
+
+        cur.execute("SELECT id, name, lyrics, album_id, length, genre_id, song_no FROM track WHERE album_id=? ORDER BY song_no", (album_id, ))
+        rows = cur.fetchall()
+        tracks_list = [Track.from_row(r) for r in rows]
+
+        # Build choices
+        choices = []
+        for track in tracks_list:
+            song_num = f"{track.song_no}. " if track.song_no else ""
+            length_str = f" ({track.length})" if track.length else ""
+            choices.append(
+                questionary.Choice(
+                    title=f"{song_num}{track.name}{length_str}",
+                    value=str(track.id)
+                )
+            )
+
+        choices.append(questionary.Choice(title="<- Go Back", value="back"))
+        choices.append(questionary.Choice(title="<- Return to Main Menu", value="main"))
+
+        ch3 = questionary.select(
+            "Select a Track:",
+            choices=choices,
+            style=questionary.Style([
+                ('pointer', 'fg:cyan bold'),
+                ('highlighted', 'fg:cyan bold'),
+                ('selected', 'fg:green'),
+            ])
+        ).ask()
+
+        if ch3 is None or ch3 == "back":
+            break
+        elif ch3 == "main":
+            flag = 1
+            break	
+
+        # Fetch details for the selected track
+        cur.execute("SELECT name, length, album_id, genre_id, lyrics FROM track WHERE id=?", (ch3, ))
+        nm6 = cur.fetchone()
+        
+        flag = lyrics.lyr_show(nm6, flag, cur)
+        
+    return flag
 	
-def track_src(trackres, flag, cur):
-	while True:
-		clear_screen()
-		if flag==1: break
-		print('===============SEARCH RESULTS===============\n\n')
-		for trackname in trackres:
-			print(trackname[0],'->',trackname[1],'\n\n')
-		print('\n\nb-> Back\n\n')
-		print('m-> Main\n\n')
-		ch3= input('Enter Choice: ')
-		if ch3=='b':
-			break
-		elif ch3=='m':
-			flag=1	
-		else:
-			cur.execute('''select name, length, album_id, genre_id, lyrics from track where id=?''', (ch3, ))
-			nm6=cur.fetchone()
-		flag=lyrics.lyr_show(nm6, flag, cur)
-	return flag	
+def track_src(trackres: list, flag: int, cur: sqlite3.Cursor) -> int:
+    while True:
+        clear_screen()
+        if flag == 1:
+            break
+
+        console.print(
+            Panel.fit(
+                "[bold cyan]SEARCH RESULTS[/bold cyan]\n"
+                "[dim]Select a track to view details and lyrics[/dim]",
+                border_style="cyan"
+            )
+        )
+
+        if not trackres:
+            console.print("[yellow]No matches found.[/yellow]")
+            questionary.press_any_key_to_continue("Press any key to go back...").ask()
+            break
+
+        # Build options dynamically
+        choices = []
+        for r in trackres:
+            track = Track.from_row(r)
+            # Try to fetch artist and album for search context
+            cur.execute(
+                "SELECT artist.name AS art_name, album.name AS alb_name "
+                "FROM album JOIN artist ON album.artist_id = artist.id "
+                "WHERE album.id = ?",
+                (track.album_id, )
+            )
+            meta = cur.fetchone()
+            meta_str = f" - by {meta['art_name']} (on {meta['alb_name']})" if meta else ""
+            choices.append(
+                questionary.Choice(
+                    title=f"{track.name}{meta_str}",
+                    value=str(track.id)
+                )
+            )
+
+        choices.append(questionary.Choice(title="<- Go Back", value="back"))
+        choices.append(questionary.Choice(title="<- Return to Main Menu", value="main"))
+
+        ch3 = questionary.select(
+            "Select a Track:",
+            choices=choices,
+            style=questionary.Style([
+                ('pointer', 'fg:cyan bold'),
+                ('highlighted', 'fg:cyan bold'),
+                ('selected', 'fg:green'),
+            ])
+        ).ask()
+
+        if ch3 is None or ch3 == "back":
+            break
+        elif ch3 == "main":
+            flag = 1
+            break	
+
+        cur.execute("SELECT name, length, album_id, genre_id, lyrics FROM track WHERE id=?", (ch3, ))
+        nm6 = cur.fetchone()
+        
+        flag = lyrics.lyr_show(nm6, flag, cur)
+        
+    return flag	

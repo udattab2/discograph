@@ -1,9 +1,7 @@
-import os
+from rich.console import Console
+
+console = Console()
 
 def clear_screen():
-    # For Windows
-    if os.name == 'nt':
-        _ = os.system('cls')
-    # For macOS and Linux (posix)
-    else:
-        _ = os.system('clear')
+    """Clears the terminal screen using Rich's console.clear()."""
+    console.clear()
