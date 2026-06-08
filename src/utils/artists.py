@@ -4,7 +4,6 @@ import utils.albums as albums
 from utils.helper import clear_screen, console
 from utils.models import Artist
 from rich.panel import Panel
-from rich.table import Table
 import questionary
 
 def art_browse(ch0: str, flag: int, cur: sqlite3.Cursor, conn: sqlite3.Connection) -> int:			
@@ -26,7 +25,8 @@ def art_browse(ch0: str, flag: int, cur: sqlite3.Cursor, conn: sqlite3.Connectio
         artists = [Artist.from_row(r) for r in rows]
 
         # Build options dynamically
-        choices = []
+        choices: list[questionary.Choice] = []
+
         for art in artists:
             choices.append(questionary.Choice(title=art.name, value=str(art.id)))
         
@@ -67,4 +67,3 @@ def art_browse(ch0: str, flag: int, cur: sqlite3.Cursor, conn: sqlite3.Connectio
         flag = albums.alb_browse(ch0, nm2, ch1, flag, cur)
         
     return flag
-

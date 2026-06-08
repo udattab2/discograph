@@ -24,7 +24,8 @@ def gen_browse(ch0: str, flag: int, cur: sqlite3.Cursor) -> int:
         genres = [Genre.from_row(r) for r in rows]
 
         # Build options dynamically
-        choices = []
+        choices: list[questionary.Choice] = []
+
         for gen in genres:
             choices.append(questionary.Choice(title=gen.name, value=str(gen.id)))
         
@@ -52,4 +53,4 @@ def gen_browse(ch0: str, flag: int, cur: sqlite3.Cursor) -> int:
         
         flag = albums.alb_browse(ch0, gr2, ch4, flag, cur)
         
-    return flag
+    return flag

@@ -1,11 +1,12 @@
 import sqlite3
+from typing import Optional
 from utils.helper import clear_screen, console
 from utils.models import Album
 import utils.tracks as tracks
 from rich.panel import Panel
 import questionary
 
-def alb_browse(ch0: str, nm2: sqlite3.Row, ch1: str, flag: int, cur: sqlite3.Cursor) -> int:
+def alb_browse(ch0: str, nm2: Optional[sqlite3.Row], ch1: str, flag: int, cur: sqlite3.Cursor) -> int:
     while True:
         clear_screen()
         if flag == 1:
@@ -37,7 +38,7 @@ def alb_browse(ch0: str, nm2: sqlite3.Row, ch1: str, flag: int, cur: sqlite3.Cur
         albums_list = [Album.from_row(r) for r in rows]
 
         # Build options dynamically
-        choices = []
+        choices: list[questionary.Choice] = []
         for alb in albums_list:
             year_str = f" ({alb.year})" if alb.year else ""
             tracks_str = f" [{alb.trackcount} tracks]" if alb.trackcount else ""
@@ -70,7 +71,7 @@ def alb_browse(ch0: str, nm2: sqlite3.Row, ch1: str, flag: int, cur: sqlite3.Cur
         # Fetch details for the selected album
         cur.execute("SELECT name, trackcount, year, id FROM album WHERE id=?", (ch2, ))
         nm4 = cur.fetchone()
+        if nm4:
+            flag = tracks.track_browse(nm4, flag, cur)
         
-        flag = tracks.track_browse(nm4, flag, cur)
-        
-    return flag
+    return flag

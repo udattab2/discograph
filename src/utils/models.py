@@ -1,22 +1,29 @@
 from dataclasses import dataclass
-from typing import Any, Dict, Optional, Type, TypeVar
+from typing import Any, Optional, Type, TypeVar, Mapping
+from dataclasses import fields
 
 T = TypeVar('T', bound='BaseModel')
 
+@dataclass
 class BaseModel:
     @classmethod
-    def from_row(cls: Type[T], row: Any) -> T:
-        """Constructs an instance of the class from a sqlite3.Row or dict-like object."""
+    def from_row(cls: Type[T], row: Mapping[str, Any] | None) -> T:
+        """
+        Constructs an instance of the class from a sqlite3.Row or dict-like object.
+        """
         if row is None:
             raise ValueError("Row data cannot be None")
-        # Extract fields from the row by matching dataclass field names
-        fields = cls.__dataclass_fields__.keys()
-        data = {}
-        for field in fields:
+
+        # Extract names of the dataclass fields
+        field_names = [f.name for f in fields(cls)]
+        
+        data: dict[str, Any] = {}
+        for field in field_names:
             try:
                 data[field] = row[field]
             except (KeyError, IndexError):
                 data[field] = None
+
         return cls(**data)
 
 @dataclass

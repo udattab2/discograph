@@ -70,4 +70,4 @@ def lyr_show(nm6: sqlite3.Row, flag: int, cur: sqlite3.Cursor) -> int:
             flag = 1
             break
             
-    return flag
+    return flag

@@ -1,4 +1,5 @@
 import sqlite3
+from typing import Any
 from utils.helper import clear_screen, console
 from utils.models import Track
 import utils.lyrics as lyrics
@@ -11,13 +12,13 @@ def track_browse(nm4: sqlite3.Row, flag: int, cur: sqlite3.Cursor) -> int:
         if flag == 1:
             break
 
-        album_name = nm4[0]
-        track_count = nm4[1]
-        release_year = nm4[2]
-        album_id = nm4[3]
+        album_name: str = nm4[0]
+        track_count: Any = nm4[1]
+        release_year: Any = nm4[2]
+        album_id: Any = nm4[3]
 
         info_text = f"[bold cyan]{album_name.upper()}[/bold cyan]\n"
-        details = []
+        details: list[str] = []
         if release_year:
             details.append(f"[dim]Year of Release:[/dim] {release_year}")
         if track_count:
@@ -31,7 +32,8 @@ def track_browse(nm4: sqlite3.Row, flag: int, cur: sqlite3.Cursor) -> int:
         tracks_list = [Track.from_row(r) for r in rows]
 
         # Build choices
-        choices = []
+        choices: list[questionary.Choice] = []
+
         for track in tracks_list:
             song_num = f"{track.song_no}. " if track.song_no else ""
             length_str = f" ({track.length})" if track.length else ""
@@ -64,12 +66,12 @@ def track_browse(nm4: sqlite3.Row, flag: int, cur: sqlite3.Cursor) -> int:
         # Fetch details for the selected track
         cur.execute("SELECT name, length, album_id, genre_id, lyrics FROM track WHERE id=?", (ch3, ))
         nm6 = cur.fetchone()
-        
-        flag = lyrics.lyr_show(nm6, flag, cur)
+        if nm6:
+            flag = lyrics.lyr_show(nm6, flag, cur)
         
     return flag
 	
-def track_src(trackres: list, flag: int, cur: sqlite3.Cursor) -> int:
+def track_src(trackres: list[Any], flag: int, cur: sqlite3.Cursor) -> int:
     while True:
         clear_screen()
         if flag == 1:
@@ -89,7 +91,8 @@ def track_src(trackres: list, flag: int, cur: sqlite3.Cursor) -> int:
             break
 
         # Build options dynamically
-        choices = []
+        choices: list[questionary.Choice] = []
+
         for r in trackres:
             track = Track.from_row(r)
             # Try to fetch artist and album for search context
@@ -100,7 +103,7 @@ def track_src(trackres: list, flag: int, cur: sqlite3.Cursor) -> int:
                 (track.album_id, )
             )
             meta = cur.fetchone()
-            meta_str = f" - by {meta['art_name']} (on {meta['alb_name']})" if meta else ""
+            meta_str = f" - by {meta[0]} (on {meta[1]})" if meta else ""
             choices.append(
                 questionary.Choice(
                     title=f"{track.name}{meta_str}",
@@ -129,7 +132,7 @@ def track_src(trackres: list, flag: int, cur: sqlite3.Cursor) -> int:
 
         cur.execute("SELECT name, length, album_id, genre_id, lyrics FROM track WHERE id=?", (ch3, ))
         nm6 = cur.fetchone()
+        if nm6:
+            flag = lyrics.lyr_show(nm6, flag, cur)
         
-        flag = lyrics.lyr_show(nm6, flag, cur)
-        
-    return flag	
+    return flag	
