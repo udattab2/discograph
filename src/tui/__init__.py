@@ -1,0 +1,3 @@
+"""
+tui package for Discograph
+"""
